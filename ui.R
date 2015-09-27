@@ -28,8 +28,10 @@ shinyUI(pageWithSidebar(
   ),
   
   mainPanel(
-    h3("Your BMI"),
+    h3("BMI"),
     verbatimTextOutput("bmi"),
+    h4("World Health Organization Category"),
+    verbatimTextOutput("bmi_range"),
     h4("You entered"),
     tags$ul(
       tags$li("Weight",
