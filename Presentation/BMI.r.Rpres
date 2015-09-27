@@ -1,0 +1,66 @@
+BMI Range
+========================================================
+author: Jeremy Sellars
+date: 9/27/2015
+
+# Do you have a healthy weight?
+
+Body Mass Index (BMI) is a quick approximation of body fat percentage.  Find out more on the [wikipedia page](https://en.wikipedia.org/wiki/Body_mass_index).
+
+========================================================
+
+# It is quick and easy
+
+1. Weigh yourself
+2. Measure your height
+3. Enter them at https://jeremyrsellars.shinyapps.io/BMI_Range
+
+========================================================
+
+# See your results
+
+![screenshot](https://github.com/jeremyrsellars/BMI/raw/master/screen_wide.png)
+
+========================================================
+
+# How BMI is calculated
+
+BMI (pounds and inches) is
+
+`703 *  Weight / Height * Height`
+
+========================================================
+
+# See the relationship of weight and height to BMI category
+
+BMI (pounds and inches) is `703 *  Weight / Height * Height`, but here is a nice way of visualising the relationship.
+
+```{r, echo=F}
+library(memisc)
+
+height <- seq(46,86, length.out=1000)
+weight <- seq(90,400, length.out=1000)
+weight_height <- expand.grid(x=height, y=weight)
+calc_bmi <- function(inches, pounds) round(703 * pounds / (inches ^ 2), 1)
+
+bmi_matrix <- matrix(calc_bmi(weight_height$x,weight_height$y),length(height),length(weight))
+
+levels <- c(15, 16, 18.5, 25, 30, 35)
+
+bmi_range <- function(bmi) cases(
+  "Very severely underweight"=bmi < 15,
+  "Severely underweight"=bmi < 16,
+  "Underweight"=bmi < 18.5,
+  "Normal (healthy weight)"=bmi < 25,
+  "Overweight"=bmi < 30,
+  "Obese Class I (Moderately obese)"=bmi < 35,
+  "Obese Class II (Severely obese)"=bmi < 40,
+  "Obese Class III (Very severely obese)"=bmi > 40)
+
+contour(height,weight,bmi_matrix,levels = levels,
+        labels=sapply(levels, bmi_range), drawlabels=T,
+        xlab="Height (inches)",
+        ylab="Weight (pounds)",
+        main="WHO BMI categories")
+
+```

@@ -33,7 +33,6 @@ shinyServer(function(input, output) {
   output$bmi_range <- renderText({as.character(bmi_range(round(703 * input$pounds / (input$inches ^ 2), 1)))})
 })
 
-bmi <- 22
 bmi_range <- function(bmi) cases(
   "Very severely underweight"=bmi < 15,
   "Severely underweight"=bmi < 16,
