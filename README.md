@@ -2,6 +2,8 @@
 
 This web app calculates your Body Mass Index (BMI) and compares it to the World Health Organization's categories.  It is designed to help you understand where your weight stands within healthy norms.
 
+[![screen](screen.png)](https://jeremyrsellars.shinyapps.io/BMI_Range)
+
 Please consult your physician.
 
 ## Shiny
